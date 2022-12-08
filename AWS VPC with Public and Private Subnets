@@ -1,0 +1,86 @@
+Login to AWS account Console
+Select your region
+
+#CREATE THE VPC##
+
+Go to services and select Network and content delivery or search VPC on the search box.
+Create a new VPC and give it a name.
+Assign a CIDR block
+click on create VPC leave everything else as default
+
+##CREATE PUBLIC AND PRIVATE SUBNETS##
+
+Click on subnets
+Select the VPC you want to have your subnets on (The one you created will pop up on the list)
+Give you subnet a name
+Select an availability zone
+Asign a CIDR Block
+click add to add subnets as desired repeating the steps 15-17
+Click on create Subnets
+
+##CREATE AN INTERNET GATEWAY
+
+Click on internet gateway
+Name you iGW
+click on create internet gateway
+Click on internet gateway to confirm It has been created
+
+##ATTACH IGW TO VPC
+
+select the IGW you created 
+on the right top corner click actions drop down menu and select attach to VPC
+Select you VPC on the pop up menu and click attach IGW
+
+## CREATE ROUTING TABLES#
+
+Select routing tables
+click on craete a public routing table
+Give it a name and select your VPC
+create the routing table
+Reapeat the same step for the private RT
+
+##CREATE ROUTE FOR PUBLIC RT
+
+Click on routing tables
+select the public Rt you created 
+on the menu select Route
+and edit routes at the botton
+click on add route
+on destination select 0000/0 and destinate select internet gateway and select the internet gateway you created
+save changes
+
+##SUBNET ASSOCIATION PUBLIC
+
+Click on routing tables
+select the public Rt you created 
+on the menu select subnet association
+on the available subnets select your public subnets and save association
+
+##CREATE A NAT GATEWAY
+
+click on create NAT GW
+give it a name
+Select the subnet you want it in (must be a public subnet)
+Connectivity type public
+Allocate an elastic IP address
+click on create
+
+##CREATE ROUTE FOR PUBLIC RT
+
+Click on routing tables
+select the private Rt you created 
+on the menu select Route
+and edit routes at the botton
+click on add route
+on destination select 0000/0 and destinate select NAT gateway and select the NAT gateway you created
+save changes
+
+##SUBNET ASSOCIATION PRIVATE
+
+Click on routing tables
+select the public Rt you created 
+on the menu select subnet association
+on the available subnets select your private subnets and save association
+
+##DONE
+Launch EC2 in this VPC & Validate your Connection
